@@ -36,22 +36,22 @@ let projects = [
         externalUrl: "https://drive.google.com/file/d/1G9lqtCNNj5gPrAgeY5wyQLlMHKpIBc2s/view?usp=sharing",
         platform: "Google Drive"
     },
-    /* {
+     {
         id: 5,
         title: "Manual Azure",
         description: "Manual de creación de cuenta Azure",
         category: "Azure",
-        date: "2024-05-12",
-        externalUrl: "https://drive.google.com/file/d/1KbyTRBNWqwB1TCXNl9YyHcn5qbhqv7qu/view?usp=sharing",
+        date: "2025-05-12",
+        externalUrl: "https://drive.google.com/file/d/1sNxPKFiKNliOiY2IldALdLy8IVvAuk-a/view?usp=sharing",
         platform: "Google Drive"
     }, */
-    /* {
+     {
         id: 6,
         title: "Manual Azure",
         description: "Manual de alojamiento de sitio web en Azure",
         category: "Azure",
-        date: "2024-06-01",
-        externalUrl: "https://drive.google.com/file/d/1nOmMLkhxpovapJqMuSM5_mBkCGVsekky/view?usp=sharing",
+        date: "2025-06-01",
+        externalUrl: "https://drive.google.com/file/d/1xMmq5yGG-t_QscUFQCAtZtua6CAiIysu/view?usp=sharing",
         platform: "Google Drive"
     }, */
     /* {
@@ -618,3 +618,4 @@ function initializePortfolio() {
 
 // Inicializar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', initializePortfolio);
+
