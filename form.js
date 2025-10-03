@@ -1,7 +1,7 @@
 // Datos de los proyectos
 let projects = [
     {
-        id: 1,
+        id: SEMANA 1,
         title: "Resumen SGBD",
         description: "Resumen crítico sobre el Libro SGBD",
         category: "Pdf",
@@ -10,7 +10,7 @@ let projects = [
         platform: "Pdf"
     },
     {
-        id: 2,
+        id: SEMANA 2,
         title: "Diagrama",
         description: "Diagrama entidad-relación, En Miro",
         category: "Miro",
@@ -19,7 +19,7 @@ let projects = [
         platform: "Miro"
     },
     {
-        id: 3,
+        id: SEMANA 3,
         title: "Diagrama",
         description: "Diagrama excel",
         category: "Visualización de Diagrama",
@@ -28,7 +28,7 @@ let projects = [
         platform: "Google Drive"
     },
     {
-        id: 4,
+        id: SEMANA 4,
         title: "Diagrama",
         description: "Diagrama entidad-relación. En Canva",
         category: "Diagrama Canva",
@@ -37,7 +37,7 @@ let projects = [
         platform: "Google Drive"
     },
      {
-        id: 5,
+        id: SEMANA 5,
         title: "Manual Azure",
         description: "Manual de creación de cuenta Azure",
         category: "Azure",
@@ -46,7 +46,7 @@ let projects = [
         platform: "Google Drive"
     }, */
      {
-        id: 6,
+        id: SEMANA 6,
         title: "Manual Azure",
         description: "Manual de alojamiento de sitio web en Azure",
         category: "Azure",
@@ -618,4 +618,5 @@ function initializePortfolio() {
 
 // Inicializar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', initializePortfolio);
+
 
