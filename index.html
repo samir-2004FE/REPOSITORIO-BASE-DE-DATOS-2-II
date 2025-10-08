@@ -1,171 +1,1099 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Samir Flores - Portafolio</title>
-  <link rel="stylesheet" href="form.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudiante - Universidad Peruana Los Andes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        /* Header */
+        header {
+            background-color: #1a365d;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            width: 50px;
+            height: 50px;
+            background-color: #e53e3e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .university-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background-color: #2d3748;
+        }
+        
+        /* Contenido principal */
+        main {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            min-height: calc(100vh - 200px);
+        }
+        
+        section {
+            display: none;
+            padding: 20px;
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        /* Estilos para el login */
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #1a365d;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: #1a365d;
+            color: white;
+            width: 100%;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2d3748;
+        }
+        
+        .btn-secondary {
+            background-color: #e53e3e;
+            color: white;
+            margin-top: 10px;
+            width: 100%;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #c53030;
+        }
+        
+        .error-message {
+            color: #e53e3e;
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        /* Estilos para el inicio */
+        .welcome-section {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .welcome-section h1 {
+            color: #1a365d;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+        
+        .welcome-section p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .rotating-phrases {
+            background-color: #f7fafc;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            font-style: italic;
+            font-size: 1.3rem;
+            color: #4a5568;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Estilos para Sobre Mí */
+        .about-section {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .profile-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .profile-image img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #1a365d;
+        }
+        
+        .profile-info {
+            flex: 2;
+            min-width: 300px;
+        }
+        
+        .profile-info h2 {
+            color: #1a365d;
+            margin-bottom: 15px;
+            font-size: 2rem;
+        }
+        
+        .profile-info h3 {
+            color: #e53e3e;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .profile-info p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        /* Estilos para Proyectos - NUEVO DISEÑO */
+        .projects-section h2 {
+            color: #1a365d;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        
+        .projects-section p {
+            margin-bottom: 30px;
+            color: #4a5568;
+        }
+        
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .project-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border-left: 4px solid #1a365d;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .project-title {
+            font-size: 1.4rem;
+            color: #1a365d;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .project-title i {
+            margin-right: 10px;
+            color: #e53e3e;
+        }
+        
+        .project-description {
+            margin-bottom: 15px;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+        
+        .project-category {
+            display: inline-block;
+            background-color: #edf2f7;
+            color: #4a5568;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+        
+        .project-platform {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #718096;
+        }
+        
+        .project-platform i {
+            margin-right: 8px;
+        }
+        
+        .project-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 15px;
+        }
+        
+        .action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #4a5568;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+        }
+        
+        .action-btn i {
+            margin-right: 5px;
+        }
+        
+        .action-btn:hover {
+            color: #1a365d;
+        }
+        
+        .action-btn.delete:hover {
+            color: #e53e3e;
+        }
+        
+        .add-project {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #1a365d;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+            z-index: 99;
+        }
+        
+        .add-project:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Modal para agregar proyecto */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            color: #1a365d;
+            margin: 0;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #718096;
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #4a5568;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .checkbox-group {
+            margin-bottom: 20px;
+        }
+        
+        .checkbox-group h3 {
+            margin-bottom: 10px;
+            color: #4a5568;
+            font-size: 1rem;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .checkbox-item input {
+            margin-right: 10px;
+        }
+        
+        .modal-footer {
+            padding: 20px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        .btn-cancel {
+            background-color: #a0aec0;
+            color: white;
+        }
+        
+        .btn-cancel:hover {
+            background-color: #718096;
+        }
+        
+        /* Estilos para Contacto */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-form .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #1a365d;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .about-section {
+                flex-direction: column;
+            }
+            
+            .projects-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <div class="header-content">
-        <div class="logo">Samir Flores</div>
-        <nav>
-          <ul>
-            <li><a href="#" onclick="showSection('inicio'); return false;">Inicio</a></li>
-            <li><a href="#" onclick="showSection('portafolio'); return false;">Portafolio</a></li>
-            <li><a href="#" onclick="showSection('contacto'); return false;">Contacto</a></li>
-          </ul>
-        </nav>
-      </div>
+    <!-- Modal de Login (aparece primero) -->
+    <div id="loginModal" class="login-container" style="display: block;">
+        <h2>Iniciar Sesión</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Usuario</label>
+                <input type="text" id="username" placeholder="Ingresa tu usuario" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" placeholder="Ingresa tu contraseña" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+            <button type="button" id="registerBtn" class="btn btn-secondary">Registrarse</button>
+            <div id="loginError" class="error-message">Usuario o contraseña incorrectos</div>
+        </form>
     </div>
-  </header>
 
-  <main class="container">
-    <!-- Sección Inicio -->
-    <section id="inicio" class="section active">
-      <div class="hero">
-        <div class="profile-img">SF</div>
-        <h1>Samir Flores</h1>
-        <p>¡Bienvenido a mi portafolio! Soy estudiante apasionado por la tecnología y el desarrollo. Aquí podrás conocer mis proyectos y trabajos más destacados. Explora mi trabajo y no dudes en contactarme si tienes alguna pregunta o propuesta.</p>
-      </div>
-    </section>
+    <!-- Contenido principal (oculto hasta login exitoso) -->
+    <div id="mainContent" style="display: none;">
+        <!-- Header -->
+        <header>
+            <div class="logo-container">
+                <div class="logo">UPLA</div>
+                <div class="university-name">Universidad Peruana Los Andes</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" data-section="inicio">Inicio</a></li>
+                    <li><a href="#" data-section="sobre-mi">Sobre Mí</a></li>
+                    <li><a href="#" data-section="proyectos">Proyectos</a></li>
+                    <li><a href="#" data-section="contacto">Contacto</a></li>
+                    <li><a href="#" id="logoutBtn">Cerrar Sesión</a></li>
+                </ul>
+            </nav>
+        </header>
 
-    <!-- Sección Portafolio -->
-    <section id="portafolio" class="section">
-      <h2 style="text-align: center; color: white; margin-bottom: 2rem; font-size: 2.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">Mi Portafolio</h2>
-      <div class="portfolio-grid" id="portfolioGrid">
-        <!-- Los proyectos se cargarán aquí dinámicamente -->
-      </div>
-      <button class="add-project-btn" onclick="openAddModal()">+</button>
-    </section>
+        <!-- Contenido principal -->
+        <main>
+            <!-- Sección Inicio -->
+            <section id="inicio" class="active">
+                <div class="welcome-section">
+                    <h1>Bienvenido a mi Página Web</h1>
+                    <p>Hola, soy Samir, estudiante de Ingeniería de Sistemas en la Universidad Peruana Los Andes. En esta página podrás conocer más sobre mí, mis proyectos académicos y contactarme si lo deseas.</p>
+                    <div class="rotating-phrases" id="rotatingPhrases">
+                        "La tecnología es mejor cuando une a las personas"
+                    </div>
+                </div>
+            </section>
 
-    <!-- Sección Contacto -->
-    <section id="contacto" class="section">
-      <div class="contact-form">
-        <h2>Contacto</h2>
-        <form id="contactForm">
-          <div class="form-group">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-          </div>
-          <div class="form-group">
-            <label for="asunto">Asunto:</label>
-            <input type="text" id="asunto" name="asunto" required>
-          </div>
-          <div class="form-group">
-            <label for="mensaje">Mensaje:</label>
-            <textarea id="mensaje" name="mensaje" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem;">Enviar Mensaje</button>
-        </form>
-      </div>
-    </section>
-  </main>
+            <!-- Sección Sobre Mí -->
+            <section id="sobre-mi">
+                <div class="about-section">
+                    <div class="profile-image">
+                        <img src="samir.png" alt="">
+                    </div>
+                    <div class="profile-info">
+                        <h2>Samir Flores</h2>
+                        <h3>Estudiante de Ingeniería de Sistemas</h3>
+                        <p>Soy un apasionado estudiante de Ingeniería de Sistemas en la Universidad Peruana Los Andes. Me fascina cómo la tecnología puede transformar la manera en que vivimos y trabajamos.</p>
+                        <p>Lo que más me apasiona de mi carrera es la capacidad de crear soluciones innovadoras que resuelvan problemas reales. Me encanta el desarrollo de software, la inteligencia artificial y el análisis de datos.</p>
+                        <p>Estoy constantemente aprendiendo nuevas tecnologías y mejorando mis habilidades para convertirme en un profesional capaz de enfrentar los desafíos del mundo tecnológico actual.</p>
+                    </div>
+                </div>
+            </section>
 
-  <!-- Modal para agregar/editar proyecto -->
-  <div id="projectModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <h3 id="modalTitle">Agregar Nuevo Proyecto</h3>
+            <!-- Sección Proyectos -->
+            <section id="proyectos" class="projects-section">
+                <h2>Mis Proyectos</h2>
+                <p>Estos son los proyectos que he desarrollado durante mis 10 semanas de trabajo:</p>
+                
+                <div class="projects-container" id="projectsContainer">
+                    <!-- Los proyectos se cargarán dinámicamente aquí -->
+                </div>
+                
+                <div class="add-project" id="addProjectBtn">+</div>
+            </section>
 
-      <!-- Pestañas para elegir método de entrada -->
-      <div class="tabs">
-        <button type="button" class="tab-btn active" onclick="showTab('manual')">Manual</button>
-        <button type="button" class="tab-btn" onclick="showTab('google-docs')">Google Docs</button>
-      </div>
+            <!-- Sección Contacto -->
+            <section id="contacto">
+                <h2>Contacto</h2>
+                <p>Si deseas ponerte en contacto conmigo, completa el siguiente formulario y me comunicaré contigo a través de WhatsApp.</p>
+                
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" id="name" placeholder="Tu nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Tu email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje</label>
+                        <textarea id="message" placeholder="Tu mensaje" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar por WhatsApp</button>
+                </form>
+            </section>
+        </main>
 
-      <!-- Formulario manual -->
-      <div id="manual-tab" class="tab-content active">
-        <form id="projectForm">
-          <div class="form-group">
-            <label for="projectTitle">Título:</label>
-            <input type="text" id="projectTitle" required>
-          </div>
-          <div class="form-group">
-            <label for="projectDescription">Descripción:</label>
-            <textarea id="projectDescription" required></textarea>
-          </div>
-          <div class="form-group">
-            <label for="projectCategory">Categoría:</label>
-            <input type="text" id="projectCategory" required>
-          </div>
-          <div class="form-group">
-            <label for="projectUrl">URL del Proyecto:</label>
-            <input type="url" id="projectUrl" placeholder="https://..." required>
-          </div>
-          <div class="form-group">
-            <label for="projectPlatform">Plataforma:</label>
-            <select id="projectPlatform" required>
-              <option value="">Seleccionar plataforma</option>
-              <option value="Google Docs">Google Docs</option>
-              <option value="Google Sheets">Google Sheets</option>
-              <option value="Canva">Canva</option>
-              <option value="Miro">Miro</option>
-              <option value="Figma">Figma</option>
-              <option value="GitHub">GitHub</option>
-              <option value="CodePen">CodePen</option>
-              <option value="Otro">Otro</option>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-primary">Guardar Proyecto</button>
-        </form>
-      </div>
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2023 Samir - Universidad Peruana Los Andes. Todos los derechos reservados.</p>
+        </footer>
+    </div>
 
-      <!-- Formulario Google Docs -->
-      <div id="google-docs-tab" class="tab-content">
-        <form id="googleDocsForm">
-          <div class="form-group">
-            <label for="googleDocsUrl">URL de Google Docs:</label>
-            <input type="url" id="googleDocsUrl" placeholder="https://docs.google.com/document/d/..." required>
-            <small style="color: #666; font-size: 0.9rem;">
-              Asegúrate de que el documento esté compartido como "Cualquier persona con el enlace puede ver"
-            </small>
-          </div>
-          <div class="form-group">
-            <label for="projectCategoryDocs">Categoría:</label>
-            <input type="text" id="projectCategoryDocs" placeholder="Ej: Desarrollo Web, Mobile, etc." required>
-          </div>
-          <button type="button" class="btn btn-info" onclick="loadFromGoogleDocs()">Cargar desde Google Docs</button>
-        </form>
-
-        <!-- Preview del contenido cargado -->
-        <div id="docsPreview" style="display: none;">
-          <h4>Vista previa del documento:</h4>
-          <div class="form-group">
-            <label for="previewTitle">Título:</label>
-            <input type="text" id="previewTitle" required>
-          </div>
-          <div class="form-group">
-            <label for="previewDescription">Descripción:</label>
-            <textarea id="previewDescription" required rows="4"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="previewCategory">Categoría:</label>
-            <input type="text" id="previewCategory" required>
-          </div>
-          <button type="button" class="btn btn-primary" onclick="saveFromPreview()">Guardar Proyecto</button>
+    <!-- Modal para agregar proyecto -->
+    <div id="addProjectModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Agregar Nuevo Proyecto</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="newProjectForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="projectTitle">Título</label>
+                            <input type="text" id="projectTitle" placeholder="Ej: Resumen SGBD" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="projectPlatform">Plataforma</label>
+                            <select id="projectPlatform" required>
+                                <option value="">Seleccionar plataforma</option>
+                                <option value="Google Drive">Google Drive</option>
+                                <option value="Miro">Miro</option>
+                                <option value="Google Excel">Google Excel</option>
+                                <option value="Google Docs">Google Docs</option>
+                                <option value="Azure">Azure</option>
+                                <option value="Otra">Otra</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectDescription">Descripción</label>
+                        <textarea id="projectDescription" placeholder="Descripción del proyecto" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectUrl">URL del Proyecto</label>
+                        <input type="url" id="projectUrl" placeholder="https://..." required>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <h3>Categoría:</h3>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="categoryPdf" name="category" value="Pdf">
+                            <label for="categoryPdf">Pdf</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="categoryDiagrama" name="category" value="Diagrama">
+                            <label for="categoryDiagrama">Diagrama</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="categoryVisualizacion" name="category" value="Visualización de Diagrama">
+                            <label for="categoryVisualizacion">Visualización de Diagrama</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="categoryDiagramaCarva" name="category" value="Diagrama Carva">
+                            <label for="categoryDiagramaCarva">Diagrama Carva</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="categoryAzure" name="category" value="Azure">
+                            <label for="categoryAzure">Azure</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="categoryDesarrolloWeb" name="category" value="Desarrollo Web">
+                            <label for="categoryDesarrolloWeb">Desarrollo Web</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-cancel" id="cancelProjectBtn">Cancelar</button>
+                <button class="btn btn-primary" id="saveProjectBtn">Guardar Proyecto</button>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 
-  <!-- Modal para ver más detalles -->
-  <div id="viewModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeViewModal()">&times;</span>
-      <h3 id="viewTitle"></h3>
-      <p id="viewDescription"></p>
-      <p><strong>Categoría:</strong> <span id="viewCategory"></span></p>
-      <p><strong>Fecha:</strong> <span id="viewDate"></span></p>
-    </div>
-  </div>
+    <script>
+        // Datos de usuario válido
+        const validUser = {
+            username: "Samir",
+            password: "Samir 1234"
+        };
 
-  <script src="form.js"></script>
+        // Frases rotativas para la sección de inicio
+        const rotatingPhrases = [
+            "La tecnología es mejor cuando une a las personas",
+            "Innovación distingue entre un líder y un seguidor",
+            "El software es un gran combinador: el multiplicador de la capacidad humana",
+            "La programación no se trata de lo que sabes, se trata de lo que puedes descubrir",
+            "La mejor manera de predecir el futuro es inventarlo"
+        ];
+
+        // Proyectos de ejemplo
+        const projects = [
+            { 
+                id: 1, 
+                title: "Resumen SGBD", 
+                description: "Resumen crítico sobre el Libro SGBD", 
+                category: "Pdf", 
+                platform: "Google Drive",
+                url: "#"
+            },
+            { 
+                id: 2, 
+                title: "Diagrama", 
+                description: "Diagrama entidad-relación, En Miro", 
+                category: "Diagrama", 
+                platform: "Miro",
+                url: "#"
+            },
+            { 
+                id: 3, 
+                title: "Diagrama", 
+                description: "Diagrama excel", 
+                category: "Visualización de Diagrama", 
+                platform: "Google Excel",
+                url: "#"
+            },
+            { 
+                id: 4, 
+                title: "Diagrama", 
+                description: "Diagrama entidad-relación, En Carva", 
+                category: "Diagrama Carva", 
+                platform: "Google Drive",
+                url: "#"
+            },
+            { 
+                id: 5, 
+                title: "Manual Azure", 
+                description: "Manual de creación de cuenta Azure", 
+                category: "Azure", 
+                platform: "Google Drive",
+                url: "#"
+            },
+            { 
+                id: 6, 
+                title: "Manual Azure", 
+                description: "Manual de alojamiento de sitio web en Azure", 
+                category: "Azure", 
+                platform: "Google Drive",
+                url: "#"
+            }
+        ];
+
+        // Elementos DOM
+        const loginModal = document.getElementById('loginModal');
+        const mainContent = document.getElementById('mainContent');
+        const loginForm = document.getElementById('loginForm');
+        const loginError = document.getElementById('loginError');
+        const registerBtn = document.getElementById('registerBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const navLinks = document.querySelectorAll('nav a[data-section]');
+        const sections = document.querySelectorAll('main section');
+        const rotatingPhrasesElement = document.getElementById('rotatingPhrases');
+        const projectsContainer = document.getElementById('projectsContainer');
+        const addProjectBtn = document.getElementById('addProjectBtn');
+        const contactForm = document.getElementById('contactForm');
+        const addProjectModal = document.getElementById('addProjectModal');
+        const closeModalBtn = document.querySelector('.close-modal');
+        const cancelProjectBtn = document.getElementById('cancelProjectBtn');
+        const saveProjectBtn = document.getElementById('saveProjectBtn');
+        const newProjectForm = document.getElementById('newProjectForm');
+
+        // Variables
+        let currentUser = null;
+        let currentPhraseIndex = 0;
+        let currentProjects = [...projects];
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar si hay un usuario guardado en localStorage
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                showMainContent();
+            }
+
+            // Configurar navegación
+            setupNavigation();
+            
+            // Configurar frases rotativas
+            setupRotatingPhrases();
+            
+            // Cargar proyectos
+            loadProjects();
+            
+            // Configurar eventos
+            setupEventListeners();
+        });
+
+        // Configurar navegación entre secciones
+        function setupNavigation() {
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetSection = this.getAttribute('data-section');
+                    
+                    // Ocultar todas las secciones
+                    sections.forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // Mostrar la sección seleccionada
+                    document.getElementById(targetSection).classList.add('active');
+                });
+            });
+        }
+
+        // Configurar frases rotativas
+        function setupRotatingPhrases() {
+            // Cambiar frase cada 6 segundos
+            setInterval(() => {
+                currentPhraseIndex = (currentPhraseIndex + 1) % rotatingPhrases.length;
+                rotatingPhrasesElement.textContent = rotatingPhrases[currentPhraseIndex];
+            }, 6000);
+        }
+
+        // Cargar proyectos en la sección
+        function loadProjects() {
+            projectsContainer.innerHTML = '';
+            
+            currentProjects.forEach(project => {
+                const projectCard = document.createElement('div');
+                projectCard.className = 'project-card';
+                projectCard.innerHTML = `
+                    <h3 class="project-title">
+                        <i class="fas fa-file-alt"></i>${project.title}
+                    </h3>
+                    <p class="project-description">${project.description}</p>
+                    <div class="project-category">${project.category}</div>
+                    <div class="project-platform">
+                        <i class="fas fa-globe"></i>${project.platform}
+                    </div>
+                    <div class="project-actions">
+                        <button class="action-btn view-project" data-id="${project.id}">
+                            <i class="fas fa-eye"></i>Ver Más
+                        </button>
+                        <button class="action-btn update-project" data-id="${project.id}">
+                            <i class="fas fa-edit"></i>Modificar
+                        </button>
+                        <button class="action-btn delete-project delete" data-id="${project.id}">
+                            <i class="fas fa-trash"></i>Eliminar
+                        </button>
+                        <button class="action-btn download-project" data-id="${project.id}">
+                            <i class="fas fa-download"></i>Descargar
+                        </button>
+                    </div>
+                `;
+                projectsContainer.appendChild(projectCard);
+            });
+            
+            // Agregar eventos a los botones de los proyectos
+            document.querySelectorAll('.view-project').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const projectId = parseInt(this.getAttribute('data-id'));
+                    viewProject(projectId);
+                });
+            });
+            
+            document.querySelectorAll('.update-project').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const projectId = parseInt(this.getAttribute('data-id'));
+                    updateProject(projectId);
+                });
+            });
+            
+            document.querySelectorAll('.delete-project').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const projectId = parseInt(this.getAttribute('data-id'));
+                    deleteProject(projectId);
+                });
+            });
+            
+            document.querySelectorAll('.download-project').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const projectId = parseInt(this.getAttribute('data-id'));
+                    downloadProject(projectId);
+                });
+            });
+        }
+
+        // Configurar eventos
+        function setupEventListeners() {
+            // Login
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                if (username === validUser.username && password === validUser.password) {
+                    currentUser = { username, password };
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    showMainContent();
+                } else {
+                    loginError.style.display = 'block';
+                }
+            });
+            
+            // Registro
+            registerBtn.addEventListener('click', function() {
+                alert('Funcionalidad de registro en desarrollo. Por ahora, usa el usuario: Samir y contraseña: Samir 1234');
+            });
+            
+            // Logout
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                currentUser = null;
+                localStorage.removeItem('currentUser');
+                showLoginModal();
+            });
+            
+            // Agregar proyecto
+            addProjectBtn.addEventListener('click', function() {
+                addProjectModal.style.display = 'flex';
+            });
+            
+            // Cerrar modal
+            closeModalBtn.addEventListener('click', function() {
+                addProjectModal.style.display = 'none';
+            });
+            
+            cancelProjectBtn.addEventListener('click', function() {
+                addProjectModal.style.display = 'none';
+            });
+            
+            // Guardar proyecto
+            saveProjectBtn.addEventListener('click', function() {
+                const title = document.getElementById('projectTitle').value;
+                const platform = document.getElementById('projectPlatform').value;
+                const description = document.getElementById('projectDescription').value;
+                const url = document.getElementById('projectUrl').value;
+                
+                // Obtener categorías seleccionadas
+                const categoryCheckboxes = document.querySelectorAll('input[name="category"]:checked');
+                const categories = Array.from(categoryCheckboxes).map(cb => cb.value);
+                
+                if (title && platform && description && url && categories.length > 0) {
+                    const newProjectId = currentProjects.length > 0 ? 
+                        Math.max(...currentProjects.map(p => p.id)) + 1 : 1;
+                    
+                    const newProject = {
+                        id: newProjectId,
+                        title: title,
+                        description: description,
+                        category: categories.join(', '),
+                        platform: platform,
+                        url: url
+                    };
+                    
+                    currentProjects.push(newProject);
+                    loadProjects();
+                    addProjectModal.style.display = 'none';
+                    newProjectForm.reset();
+                } else {
+                    alert('Por favor, completa todos los campos obligatorios.');
+                }
+            });
+            
+            // Formulario de contacto
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                
+                // Crear mensaje para WhatsApp
+                const whatsappMessage = `Hola Samir, mi nombre es ${name}. ${message}. Mi email es ${email}.`;
+                const encodedMessage = encodeURIComponent(whatsappMessage);
+                
+                // Abrir WhatsApp con el mensaje
+                window.open(`https://wa.me/51987654321?text=${encodedMessage}`, '_blank');
+                
+                // Limpiar formulario
+                contactForm.reset();
+            });
+        }
+
+        // Mostrar contenido principal después del login
+        function showMainContent() {
+            loginModal.style.display = 'none';
+            mainContent.style.display = 'block';
+        }
+
+        // Mostrar modal de login
+        function showLoginModal() {
+            loginModal.style.display = 'block';
+            mainContent.style.display = 'none';
+            loginForm.reset();
+            loginError.style.display = 'none';
+        }
+
+        // Funciones para proyectos
+        function viewProject(id) {
+            const project = currentProjects.find(p => p.id === id);
+            if (project) {
+                window.open(project.url, '_blank');
+            }
+        }
+
+        function updateProject(id) {
+            const project = currentProjects.find(p => p.id === id);
+            if (project) {
+                // Rellenar el formulario con los datos del proyecto
+                document.getElementById('projectTitle').value = project.title;
+                document.getElementById('projectPlatform').value = project.platform;
+                document.getElementById('projectDescription').value = project.description;
+                document.getElementById('projectUrl').value = project.url;
+                
+                // Limpiar checkboxes
+                document.querySelectorAll('input[name="category"]').forEach(cb => {
+                    cb.checked = false;
+                });
+                
+                // Marcar las categorías del proyecto
+                project.category.split(', ').forEach(cat => {
+                    const checkbox = document.querySelector(`input[value="${cat}"]`);
+                    if (checkbox) checkbox.checked = true;
+                });
+                
+                // Mostrar modal
+                addProjectModal.style.display = 'flex';
+                
+                // Eliminar el proyecto actual
+                currentProjects = currentProjects.filter(p => p.id !== id);
+            }
+        }
+
+        function deleteProject(id) {
+            if (confirm("¿Estás seguro de que quieres eliminar este proyecto?")) {
+                currentProjects = currentProjects.filter(p => p.id !== id);
+                loadProjects();
+            }
+        }
+
+        function downloadProject(id) {
+            const project = currentProjects.find(p => p.id === id);
+            if (project) {
+                // Simular descarga
+                alert(`Descargando: ${project.title}`);
+            }
+        }
+    </script>
 </body>
 </html>
