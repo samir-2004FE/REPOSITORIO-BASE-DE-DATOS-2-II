@@ -722,7 +722,7 @@
                     <li><a href="#" data-section="sobre-mi">Sobre Mí</a></li>
                     <li><a href="#" data-section="proyectos">Proyectos</a></li>
                     <li><a href="#" data-section="contacto">Contacto</a></li>
-                    <li><a href="#" id="logoutBtn">Cerrar Sesión</a></li>
+                    <li><a href="#" id="loginLink">Iniciar Sesión</a></li>
                 </ul>
             </nav>
         </header>
@@ -744,7 +744,7 @@
             <section id="sobre-mi">
                 <div class="about-section">
                     <div class="profile-image">
-                        <img src="samir.png" alt="">
+                        <img src="samir.png" alt="Samir Flores">
                     </div>
                     <div class="profile-info">
                         <h2>Samir Flores</h2>
@@ -759,7 +759,7 @@
             <!-- Sección Proyectos -->
             <section id="proyectos" class="projects-section">
                 <h2>Mis Proyectos por Semana</h2>
-                <p>Estos son los proyectos que he desarrollado organizados por semanas:</p>
+                <p>Estos son los proyectos que he desarrollado organizados por semanas. Cualquier persona puede ver, agregar, editar o eliminar proyectos.</p>
                 
                 <div class="weeks-container" id="weeksContainer">
                     <!-- Las semanas se cargarán dinámicamente aquí -->
@@ -903,7 +903,7 @@
         const loginForm = document.getElementById('loginForm');
         const loginError = document.getElementById('loginError');
         const registerBtn = document.getElementById('registerBtn');
-        const logoutBtn = document.getElementById('logoutBtn');
+        const loginLink = document.getElementById('loginLink');
         const navLinks = document.querySelectorAll('nav a[data-section]');
         const sections = document.querySelectorAll('main section');
         const rotatingPhrasesElement = document.getElementById('rotatingPhrases');
@@ -934,16 +934,6 @@
 
         // Inicialización
         document.addEventListener('DOMContentLoaded', function() {
-            // Verificar si hay un usuario guardado en localStorage
-            const savedUser = localStorage.getItem('currentUser');
-            if (savedUser) {
-                currentUser = JSON.parse(savedUser);
-                showMainContent();
-            } else {
-                // Si no hay usuario guardado, mostrar el inicio directamente
-                showMainContent();
-            }
-
             // Cargar semanas desde localStorage
             loadWeeksFromStorage();
             
@@ -1139,6 +1129,7 @@
                     currentUser = { username, password };
                     localStorage.setItem('currentUser', JSON.stringify(currentUser));
                     showMainContent();
+                    updateLoginLink();
                 } else {
                     loginError.style.display = 'block';
                 }
@@ -1149,22 +1140,22 @@
                 alert('Funcionalidad de registro en desarrollo. Por ahora, usa el usuario: Samir y contraseña: Samir 1234');
             });
             
-            // Logout
-            logoutBtn.addEventListener('click', function(e) {
+            // Enlace de login
+            loginLink.addEventListener('click', function(e) {
                 e.preventDefault();
-                currentUser = null;
-                localStorage.removeItem('currentUser');
-                showLoginModal();
+                if (currentUser) {
+                    // Si ya está logueado, cerrar sesión
+                    currentUser = null;
+                    localStorage.removeItem('currentUser');
+                    updateLoginLink();
+                } else {
+                    // Si no está logueado, mostrar modal de login
+                    showLoginModal();
+                }
             });
             
             // Agregar semana
             addWeekBtn.addEventListener('click', function() {
-                // Verificar si el usuario está logueado
-                if (!currentUser) {
-                    showLoginModal();
-                    return;
-                }
-                
                 isEditing = false;
                 modalTitle.textContent = "Agregar Nueva Semana";
                 newWeekForm.reset();
@@ -1271,6 +1262,15 @@
             });
         }
 
+        // Actualizar enlace de login/logout
+        function updateLoginLink() {
+            if (currentUser) {
+                loginLink.textContent = 'Cerrar Sesión';
+            } else {
+                loginLink.textContent = 'Iniciar Sesión';
+            }
+        }
+
         // Resetear campos del modal
         function resetModal() {
             isEditing = false;
@@ -1349,12 +1349,6 @@
 
         // Actualizar semana
         function updateWeek(id) {
-            // Verificar si el usuario está logueado
-            if (!currentUser) {
-                showLoginModal();
-                return;
-            }
-            
             const week = currentWeeks.find(w => w.id === id);
             if (week) {
                 isEditing = true;
@@ -1378,12 +1372,6 @@
 
         // Eliminar semana
         function deleteWeek(id) {
-            // Verificar si el usuario está logueado
-            if (!currentUser) {
-                showLoginModal();
-                return;
-            }
-            
             if (confirm("¿Estás seguro de que quieres eliminar esta semana y todos sus documentos?")) {
                 currentWeeks = currentWeeks.filter(w => w.id !== id);
                 // Guardar semanas en localStorage
