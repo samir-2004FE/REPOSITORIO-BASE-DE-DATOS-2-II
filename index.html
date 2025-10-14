@@ -689,8 +689,8 @@
     </style>
 </head>
 <body>
-    <!-- Modal de Login (aparece primero) -->
-    <div id="loginModal" class="login-container" style="display: block;">
+    <!-- Modal de Login (oculto por defecto) -->
+    <div id="loginModal" class="login-container" style="display: none;">
         <h2>Iniciar Sesión</h2>
         <form id="loginForm">
             <div class="form-group">
@@ -708,8 +708,8 @@
         </form>
     </div>
 
-    <!-- Contenido principal (oculto hasta login exitoso) -->
-    <div id="mainContent" style="display: none;">
+    <!-- Contenido principal (visible por defecto) -->
+    <div id="mainContent" style="display: block;">
         <!-- Header -->
         <header>
             <div class="logo-container">
@@ -863,7 +863,7 @@
         ];
 
         // Semanas de ejemplo
-        const weeks = [
+        const defaultWeeks = [
             {
                 id: 1,
                 number: 1,
@@ -927,7 +927,7 @@
         // Variables
         let currentUser = null;
         let currentPhraseIndex = 0;
-        let currentWeeks = [...weeks];
+        let currentWeeks = [];
         let currentAction = ''; // 'view', 'download'
         let currentWeekId = null;
         let isEditing = false;
@@ -939,8 +939,14 @@
             if (savedUser) {
                 currentUser = JSON.parse(savedUser);
                 showMainContent();
+            } else {
+                // Si no hay usuario guardado, mostrar el inicio directamente
+                showMainContent();
             }
 
+            // Cargar semanas desde localStorage
+            loadWeeksFromStorage();
+            
             // Configurar navegación
             setupNavigation();
             
@@ -982,6 +988,22 @@
                 currentPhraseIndex = (currentPhraseIndex + 1) % rotatingPhrases.length;
                 rotatingPhrasesElement.textContent = rotatingPhrases[currentPhraseIndex];
             }, 6000);
+        }
+
+        // Cargar semanas desde localStorage
+        function loadWeeksFromStorage() {
+            const savedWeeks = localStorage.getItem('userWeeks');
+            if (savedWeeks) {
+                currentWeeks = JSON.parse(savedWeeks);
+            } else {
+                currentWeeks = [...defaultWeeks];
+                saveWeeksToStorage();
+            }
+        }
+
+        // Guardar semanas en localStorage
+        function saveWeeksToStorage() {
+            localStorage.setItem('userWeeks', JSON.stringify(currentWeeks));
         }
 
         // Cargar semanas en la sección
@@ -1137,6 +1159,12 @@
             
             // Agregar semana
             addWeekBtn.addEventListener('click', function() {
+                // Verificar si el usuario está logueado
+                if (!currentUser) {
+                    showLoginModal();
+                    return;
+                }
+                
                 isEditing = false;
                 modalTitle.textContent = "Agregar Nueva Semana";
                 newWeekForm.reset();
@@ -1212,6 +1240,9 @@
                         
                         currentWeeks.push(newWeek);
                     }
+                    
+                    // Guardar semanas en localStorage
+                    saveWeeksToStorage();
                     
                     loadWeeks();
                     addWeekModal.style.display = 'none';
@@ -1318,6 +1349,12 @@
 
         // Actualizar semana
         function updateWeek(id) {
+            // Verificar si el usuario está logueado
+            if (!currentUser) {
+                showLoginModal();
+                return;
+            }
+            
             const week = currentWeeks.find(w => w.id === id);
             if (week) {
                 isEditing = true;
@@ -1341,15 +1378,19 @@
 
         // Eliminar semana
         function deleteWeek(id) {
+            // Verificar si el usuario está logueado
+            if (!currentUser) {
+                showLoginModal();
+                return;
+            }
+            
             if (confirm("¿Estás seguro de que quieres eliminar esta semana y todos sus documentos?")) {
                 currentWeeks = currentWeeks.filter(w => w.id !== id);
+                // Guardar semanas en localStorage
+                saveWeeksToStorage();
                 loadWeeks();
             }
         }
     </script>
 </body>
 </html>
-
-
-
-
